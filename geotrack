@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canlı Konum Takibi</title>
+</head>
+<body>
+    <h1>Konum Takibi</h1>
+    <p id="konum">Konum bilgisi bekleniyor...</p>
+    <script>
+        if ("geolocation" in navigator) {
+            navigator.geolocation.watchPosition(
+                function(position) {
+                    document.getElementById("konum").innerText =
+                        "Enlem: " + position.coords.latitude + 
+                        " Boylam: " + position.coords.longitude +
+                        " Hız: " + (position.coords.speed ? position.coords.speed + " m/s" : "Bilinmiyor");
+                },
+                function(error) {
+                    document.getElementById("konum").innerText = 
+                        "Hata Kodu: " + error.code + " - " + error.message;
+                }
+            );
+        } else {
+            document.getElementById("konum").innerText = "Tarayıcınız konum servisini desteklemiyor.";
+        }
+    </script>
+</body>
+</html>
